@@ -4,7 +4,7 @@ A Path of Exile Timeless Jewel emulator.
 
 ## How Timeless Jewels modify passive skills
 
-For each passive skill in range of the Timeless Jewel's radius the game runs a function. Let's call this function `process_passive_skill`. 
+For each passive skill in range of the Timeless Jewel the game runs a function. Let's call this function `process_passive_skill`. 
 The purpose of this function is to take a couple of inputs related to the processed passive skill and the socketed Timeless Jewel and output a modified passive skill.   
 The inputs to this function include:
 
@@ -45,9 +45,12 @@ A little note first. An addition is not the same as a Stat. In theory one additi
 2. Create a filtered list of applicable additions (similar conditions as in the replacement part). For each addition we have to make, roll a value between zero and the total spawn weight of all applicable additions. Iterate all applicable additions and check if the iterated addition's spawn weight is bigger than the roll. If it is, we have found the addition we'll add, if not subtract the iterated addition's spawn weight from the roll and continue iterating.
 3. This step is the same as step 3 from the replacement part. We check how many stats are associated with the addition and roll each of them.
 
-## The Random Number Generator
+## The Pseudo Random Number Generator
 
-The game uses a modified version of the [TinyMT32](https://datatracker.ietf.org/doc/html/draft-ietf-tsvwg-tinymt32) random number generator for all things related to the Timeless Jewel mechanic. The game's version has a different internal state size, a modified `tinymt32_next_state` function and uses the parameters `mat1`, `mat2` and `tmat` a bit differently than the original algorithm.
+The game uses a modified version of the [TinyMT32](https://datatracker.ietf.org/doc/html/draft-ietf-tsvwg-tinymt32) pseudo random number generator for all things related to the Timeless Jewel mechanic. The game's version has a different internal state size, a modified `tinymt32_next_state` function and uses the parameters `mat1`, `mat2` and `tmat` a bit differently than the original algorithm.  
+
+The seed used for the pseudo random generator is a array of two 4 byte unsigned integers.
+The first is the `graph_id` and the second the `jewel_seed` (cast to a 4 byte value).
 
 ## Notes
 
@@ -71,4 +74,4 @@ The answer is: they stack.
 #### Does the Timeless Jewel's seed and its conqueror interact?
 
 No, the seed only affects small and notable passive skills and the conqueror only keystones.  
-This means two Timeless Jewels with the same seed but different conquerors affect small and notables the same way.
+This means two Timeless Jewels with the same seed but different conquerors affect small and notable passive skills the same way.
