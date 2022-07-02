@@ -7,10 +7,11 @@
 	<ItemGroup>
 		<PackageReference Include="Spectre.Console" Version="0.44.0" />
 	</ItemGroup>
-	<ItemGroup>
-		<Content Include="Content\Data\*.*">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-			<Link>data\%(Filename)%(Extension)</Link>
-		</Content>
-	</ItemGroup>
+	<Target Name="CopyContentFilesToOutputDirectory" AfterTargets="Build;CopyAllFilesToSingleFolderForPackage">
+		<ItemGroup>
+			<ContentFiles Include="Content\**\*.*" />
+		</ItemGroup>
+		<Copy SourceFiles="@(ContentFiles)" DestinationFolder="$(OutputPath)%(RecursiveDir)" SkipUnchangedFiles="false" />
+		<Copy Condition="'$(PublishProtocol)' == 'FileSystem'" SourceFiles="@(ContentFiles)" DestinationFolder="$(PublishDir)%(RecursiveDir)" SkipUnchangedFiles="false" />
+	</Target>
 </Project>
