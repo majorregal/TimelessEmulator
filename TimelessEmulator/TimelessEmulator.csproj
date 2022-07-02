@@ -7,4 +7,10 @@
 	<ItemGroup>
 		<PackageReference Include="Spectre.Console" Version="0.44.0" />
 	</ItemGroup>
+	<ItemGroup>
+		<Content Include="Content\Data\*.*">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<Link>data\%(Filename)%(Extension)</Link>
+		</Content>
+	</ItemGroup>
 </Project>
