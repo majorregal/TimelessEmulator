@@ -49,8 +49,8 @@ A little note first. An addition is not the same as a Stat. In theory one additi
 
 The game uses a modified version of the [TinyMT32](https://datatracker.ietf.org/doc/html/draft-ietf-tsvwg-tinymt32) pseudo random number generator for all things related to the Timeless Jewel mechanic. The game's version has a different internal state size, a modified `tinymt32_next_state` function and uses the parameters `mat1`, `mat2` and `tmat` a bit differently than the original algorithm.  
 
-The seed used for the pseudo random generator is a array of two 4 byte unsigned integers.
-The first is the `graph_id` and the second the `jewel_seed` (cast to a 4 byte value).
+The seed used for the pseudo random number generator is an array of two 4 byte unsigned integers.
+The first is the `graph_id` and the second is the `jewel_seed` (cast to a 4 byte value).
 
 ## Notes
 
